@@ -1,0 +1,174 @@
+.movie-details-page {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.movie-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .movie-details-grid {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .movie-details-grid {
+    grid-template-columns: 400px 1fr;
+  }
+}
+
+.movie-poster-section {
+  width: 100%;
+}
+
+.movie-poster-large {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.movie-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.movie-title-large {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  color: #2c2c2c;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.movie-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  color: #6c757d;
+  font-size: 1.125rem;
+}
+
+.meta-item {
+  font-weight: 500;
+}
+
+.meta-divider {
+  color: #e0e0e0;
+}
+
+.movie-rating-large {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.star-display-large {
+  color: #d4af37;
+  font-size: 1.75rem;
+  letter-spacing: 3px;
+}
+
+.rating-info {
+  font-size: 1.125rem;
+  color: #6c757d;
+}
+
+.movie-description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #2c2c2c;
+}
+
+.movie-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-delete-movie {
+  padding: 0.75rem 1.5rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-delete-movie:hover {
+  background-color: #c82333;
+}
+
+.reviews-section {
+  margin-top: 4rem;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.reviews-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #2c2c2c;
+  margin: 0;
+}
+
+.btn-add-review {
+  padding: 0.75rem 1.5rem;
+  background-color: #d4af37;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-add-review:hover {
+  background-color: #c4a028;
+}
+
+.reviews-list {
+  margin-top: 2rem;
+}
+
+.empty-reviews {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border: 2px dashed #e0e0e0;
+}
+
+.empty-reviews p {
+  font-size: 1.125rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .movie-title-large {
+    font-size: 2rem;
+  }
+
+  .reviews-title {
+    font-size: 1.5rem;
+  }
+}

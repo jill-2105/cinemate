@@ -1,0 +1,46 @@
+.home-page {
+  min-height: 100vh;
+}
+
+.featured-section {
+  padding: 4rem 0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #2c2c2c;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.empty-text {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.125rem;
+  padding: 2rem;
+}

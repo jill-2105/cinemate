@@ -1,0 +1,209 @@
+.profile-page {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.profile-header {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.profile-username {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  color: #2c2c2c;
+  margin: 0 0 0.5rem 0;
+}
+
+.profile-email {
+  color: #6c757d;
+  font-size: 1.125rem;
+  margin: 0 0 2rem 0;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-edit,
+.btn-delete-account {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #d4af37;
+  color: #ffffff;
+}
+
+.btn-edit:hover {
+  background-color: #c4a028;
+}
+
+.btn-delete-account {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.btn-delete-account:hover {
+  background-color: #c82333;
+}
+
+.reviews-section {
+  margin-top: 3rem;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: #2c2c2c;
+  margin-bottom: 2rem;
+}
+
+.user-reviews-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.user-review-item {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.user-review-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-movie-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #d4af37;
+  margin: 0 0 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.review-movie-title:hover {
+  color: #c4a028;
+}
+
+.review-rating {
+  color: #d4af37;
+  font-size: 1.125rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.75rem;
+}
+
+.review-text-preview {
+  color: #2c2c2c;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border: 2px dashed #e0e0e0;
+}
+
+.empty-state p {
+  font-size: 1.125rem;
+  color: #6c757d;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.75rem;
+  color: #2c2c2c;
+  margin: 0 0 1.5rem 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #2c2c2c;
+}
+
+.btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-save {
+  background-color: #d4af37;
+  color: #ffffff;
+}
+
+.btn-save:hover {
+  background-color: #c4a028;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    padding: 2rem 1.5rem;
+  }
+
+  .profile-username {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
