@@ -1,8 +1,4 @@
-import axios from "axios"
-
-const api = axios.create({
-  baseURL: "http://localhost:5000",
-})
+import apiClient from "../api/client"
 
 export const getAuthData = () => {
   const username = localStorage.getItem("username")
@@ -28,7 +24,7 @@ export const checkSession = () => {
 // Reviewer endpoints
 export const registerReviewer = async (username, email, password) => {
   try {
-    const response = await api.post("/reviewers/register", { username, email, password })
+    const response = await apiClient.post("/reviewers/register", { username, email, password })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || "Registration failed" }
@@ -37,7 +33,7 @@ export const registerReviewer = async (username, email, password) => {
 
 export const loginReviewer = async (username, password) => {
   try {
-    const response = await api.post("/reviewers/login", { username, password })
+    const response = await apiClient.post("/reviewers/login", { username, password })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || "Login failed" }
@@ -46,7 +42,7 @@ export const loginReviewer = async (username, password) => {
 
 export const getReviewer = async (username) => {
   try {
-    const response = await api.get(`/reviewers/${username}`)
+    const response = await apiClient.get(`/reviewers/${username}`)
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || "Failed to fetch reviewer" }
@@ -56,7 +52,7 @@ export const getReviewer = async (username) => {
 export const updateReviewer = async (username, newData) => {
   try {
     checkSession()
-    const response = await api.put("/reviewers/update", { username, newData })
+    const response = await apiClient.put("/reviewers/update", { username, newData })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Update failed" }
@@ -66,7 +62,7 @@ export const updateReviewer = async (username, newData) => {
 export const deleteReviewer = async (username) => {
   try {
     checkSession()
-    const response = await api.delete("/reviewers/delete", { data: { username } })
+    const response = await apiClient.delete("/reviewers/delete", { data: { username } })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Delete failed" }
@@ -76,7 +72,7 @@ export const deleteReviewer = async (username) => {
 // Movie endpoints
 export const getAllMovies = async () => {
   try {
-    const response = await api.get("/movies/all")
+    const response = await apiClient.get("/movies/all")
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || "Failed to fetch movies" }
@@ -85,7 +81,7 @@ export const getAllMovies = async () => {
 
 export const getMovie = async (title) => {
   try {
-    const response = await api.get(`/movies/movie/${encodeURIComponent(title)}`)
+    const response = await apiClient.get(`/movies/movie/${encodeURIComponent(title)}`)
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || "Failed to fetch movie" }
@@ -96,7 +92,7 @@ export const createMovie = async (movieData) => {
   try {
     checkSession()
     const { username, password } = getAuthData()
-    const response = await api.post("/movies/create", { ...movieData, username, password })
+    const response = await apiClient.post("/movies/create", { ...movieData, username, password })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Failed to create movie" }
@@ -107,7 +103,7 @@ export const updateMovie = async (title, updateData) => {
   try {
     checkSession()
     const { username, password } = getAuthData()
-    const response = await api.put("/movies/update", { title, updateData, username, password })
+    const response = await apiClient.put("/movies/update", { title, updateData, username, password })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Failed to update movie" }
@@ -118,7 +114,7 @@ export const deleteMovie = async (title) => {
   try {
     checkSession()
     const { username, password } = getAuthData()
-    const response = await api.delete("/movies/delete", { data: { title, username, password } })
+    const response = await apiClient.delete("/movies/delete", { data: { title, username, password } })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Failed to delete movie" }
@@ -129,7 +125,7 @@ export const deleteMovie = async (title) => {
 export const addReview = async (movieTitle, reviewerUsername, rating, reviewText, password) => {
   try {
     checkSession()
-    const response = await api.post("/reviews/add", {
+    const response = await apiClient.post("/reviews/add", {
       movieTitle,
       reviewerUsername,
       rating,
@@ -146,11 +142,11 @@ export const deleteReview = async (id) => {
   try {
     checkSession()
     const { username, password } = getAuthData()
-    const response = await api.delete(`/reviews/delete/${id}`, { data: { username, password } })
+    const response = await apiClient.delete(`/reviews/delete/${id}`, { data: { username, password } })
     return { data: response.data }
   } catch (error) {
     return { error: error.response?.data?.message || error.message || "Failed to delete review" }
   }
 }
 
-export default api
+export default apiClient
