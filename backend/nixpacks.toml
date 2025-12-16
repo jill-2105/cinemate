@@ -1,2 +1,9 @@
-[phases.setup]
-nixPkgs = ["nodejs_20", "npm-10_x"]
+[phases.install]
+# run npm ci without any special cache mount
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm ci"]
+
+[start]
+cmd = "npm start"
