@@ -149,4 +149,19 @@ export const deleteReview = async (id) => {
   }
 }
 
+// Health check endpoint
+export const checkBackendHealth = async () => {
+  try {
+    const response = await apiClient.get('/health')
+    console.log('Backend health check result:', response.data)
+    return { data: response.data, success: true }
+  } catch (error) {
+    console.error('Backend health check failed:', error)
+    return { 
+      error: error.response?.data?.message || error.message || "Backend health check failed",
+      success: false 
+    }
+  }
+}
+
 export default apiClient

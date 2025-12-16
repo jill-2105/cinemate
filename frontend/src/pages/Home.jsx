@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Hero from "../components/Hero"
 import MovieCard from "../components/MovieCard"
 import LoadingSpinner from "../components/LoadingSpinner"
+import HealthCheck from "../components/HealthCheck"
 import { getAllMovies } from "../utils/api"
 
 const Home = () => {
@@ -27,6 +28,13 @@ const Home = () => {
   return (
     <div>
       <Hero />
+
+      {/* Health Check Section */}
+      <section className="py-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <HealthCheck />
+        </div>
+      </section>
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
