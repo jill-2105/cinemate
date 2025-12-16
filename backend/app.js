@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const reviewerRoutes = require('./routes/reviewers.js');
 const movieRoutes = require('./routes/movies.js');
@@ -8,7 +9,7 @@ const reviewRoutes = require('./routes/reviews.js');
 const app = express();
 app.use(express.json());
 
-const dbLink = 'mongodb://127.0.0.1:27017/movie_review?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.7';
+const dbLink = process.env.MONGODB_URI;
 
 if (process.env.NODE_ENV !== 'test') {
 mongoose
