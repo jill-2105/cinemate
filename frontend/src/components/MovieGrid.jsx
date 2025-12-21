@@ -24,8 +24,8 @@ const MovieGrid = ({ movies, loading }) => {
       case "title":
         result.sort((a, b) => a.title.localeCompare(b.title))
         break
-      case "year":
-        result.sort((a, b) => b.year - a.year)
+      case "releaseYear":
+        result.sort((a, b) => b.releaseYear - a.releaseYear)
         break
       case "rating":
         result.sort((a, b) => {
@@ -66,7 +66,7 @@ const MovieGrid = ({ movies, loading }) => {
           className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
         >
           <option value="title">Sort by Title (A-Z)</option>
-          <option value="year">Sort by Year (Newest)</option>
+          <option value="releaseYear">Sort by Year (Newest)</option>
           <option value="rating">Sort by Rating (Highest)</option>
         </select>
       </div>

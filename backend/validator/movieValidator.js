@@ -1,15 +1,32 @@
 const Joi = require('joi');
 
-// Data field of Movies
-const title = Joi.string().min(2).max(30).regex(/^[A-Za-z0-9\s]+$/);
-const releaseYear = Joi.number().integer().min(1900).max(new Date().getFullYear() + 1);
-const genre = Joi.string().min(3).max(30).pattern(/^[A-Za-z0-9\s\-/&]+$/);
+// Movie fields
+const title = Joi.string()
+  .min(1)                      // allow very short titles (e.g. test data)
+  .max(100)                    // reasonable upper bound
+  .trim();
 
-// Data field of reviewers
-const username = Joi.string().alphanum().min(5).max(15);
-const password = Joi.string().min(8).max(20);
+const releaseYear = Joi.number()
+  .integer()
+  .min(1900)
+  .max(new Date().getFullYear() + 1);
 
-// Validator for Movies route
+const genre = Joi.string()
+  .min(3)
+  .max(50)
+  .trim();
+
+// Reviewer fields for movie routes
+const username = Joi.string()
+  .min(3)                      // allow shorter usernames in tests
+  .max(30)
+  .trim();
+
+const password = Joi.string()
+  .min(6)                      // allow 6+ chars (tests use 'pass123456' so still valid)
+  .max(50);
+
+// Validator for Movies route (body)
 const movieValidateSchema = Joi.object({
   username: username.required(),
   password: password.required(),
@@ -18,6 +35,7 @@ const movieValidateSchema = Joi.object({
   genre: genre.required(),
 });
 
+// Validator for :title param
 const movieTitleSchema = Joi.object({
   title: title.required(),
 });

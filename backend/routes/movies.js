@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const Movie = require('../models/movie.js');
+const Review = require('../models/review');
 const Reviewer = require('../models/reviewer.js');
 
 const validate = require('../validator/middleware');
@@ -15,15 +16,19 @@ const router = express.Router();
 router.post('/add', validate(movieValidateSchema), async (req, res) => {
     try {
         const { username, password, title, releaseYear, genre} = req.body;
+        console.log('ADD /movies/add body:', req.body);
         
             // Checking if user exists by checking username
             const reviewerCheck = await Reviewer.findOne({ username });
+             console.log(`🔍 Reviewer '${username}':`, reviewerCheck ? 'FOUND' : 'NOT FOUND');
             if (!reviewerCheck) {
+                console.log(`❌ No reviewer: ${username}`);
                 return res.status(404).json({ message: 'Reviewer not found. Please Register' });
             }
     
             // Comparing the password entered with the hashed password of user 
             const passwordMatch = await bcrypt.compare(password, reviewerCheck.password);
+             console.log(`🔑 Password match for ${username}:`, passwordMatch);
             if (!passwordMatch) {
                 return res.status(401).json({ message: 'Invalid Credentials' });
             }
@@ -43,7 +48,9 @@ router.post('/add', validate(movieValidateSchema), async (req, res) => {
 
         // Saving Movie to DB
         const savedMovie = await newMovie.save();
+        console.log('✅ Movie saved:', savedMovie._id);
         const populatedMovie = await Movie.findById(savedMovie._id).populate('author', 'username');
+console.log('👤 Populated author:', populatedMovie.author?.username);
         return res.status(201).json({ message: `Movie ${savedMovie.title} added successfully`, movie: populatedMovie });
 
     } catch (error) {
@@ -54,15 +61,51 @@ router.post('/add', validate(movieValidateSchema), async (req, res) => {
     }
 });
 
-// Get all movies
 router.get('/all', async (req, res) => {
-    try {
-        // Fetching all the Movies
-        const allMovies = await Movie.find().populate('author', 'username');
-        return res.status(200).json({ message: 'Movies fetched Successfully', movies: allMovies });
-    } catch (error) {
-        return res.status(500).json({ message: 'Error Fetching Movies', error: error.message });
-    }
+  try {
+    console.log('🎬 Fetching movies with ratings...');
+    
+    // Get all movies
+    const movies = await Movie.find().populate('author', 'username').lean();
+    
+    // Get average ratings for all movies
+    const movieIds = movies.map(movie => movie._id);
+    const ratings = await Review.aggregate([
+      { $match: { movie: { $in: movieIds } } },
+      {
+        $group: {
+          _id: "$movie",
+          avgRating: { $avg: "$rating" },
+          reviewCount: { $sum: 1 }
+        }
+      }
+    ]);
+
+    // Create rating map
+    const ratingMap = {};
+    ratings.forEach(rating => {
+      ratingMap[rating._id.toString()] = {
+        avgRating: parseFloat(rating.avgRating.toFixed(1)),
+        reviewCount: rating.reviewCount
+      };
+    });
+
+    // Attach ratings to movies (keeps author population too!)
+    const moviesWithRatings = movies.map(movie => ({
+      ...movie,
+      reviews: ratingMap[movie._id.toString()] ? 
+        [{ rating: ratingMap[movie._id.toString()].avgRating }] : []
+    }));
+
+    console.log('✅ First movie reviews:', moviesWithRatings[0]?.reviews);
+    return res.status(200).json({ 
+      message: 'Movies fetched successfully with ratings', 
+      movies: moviesWithRatings 
+    });
+  } catch (error) {
+    console.error('❌ Movies error:', error);
+    return res.status(500).json({ message: 'Error fetching movies', error: error.message });
+  }
 });
 
 // Get specific movie by title

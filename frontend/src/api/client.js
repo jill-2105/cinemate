@@ -11,7 +11,7 @@ import axios from "axios"
  */
 const getBaseURL = () => {
   const apiUrl = process.env.REACT_APP_API_URL
-
+  console.log("API URL:", apiUrl);
   // In development, throw a clear error if missing for easy debugging
   if (process.env.NODE_ENV === "development" && !apiUrl) {
     throw new Error(

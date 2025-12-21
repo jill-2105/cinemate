@@ -35,7 +35,7 @@ function App() {
           </Routes>
         </main>
         <footer className="bg-gray-900 text-white py-6 text-center">
-          <p className="text-sm">Built with love for cinephiles | © 2025 Cinemate</p>
+          <p className="text-sm">Built with love for cinephiles | © 2025 Cinemate | Jill Patel</p>
         </footer>
       </div>
     </Router>

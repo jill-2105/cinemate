@@ -143,7 +143,7 @@ const MovieDetails = () => {
             <p className="text-lg text-gray-600 mb-4">
               <span>{movie.director}</span>
               <span className="mx-2">•</span>
-              <span>{movie.year}</span>
+              <span>{movie.releaseYear}</span>
               <span className="mx-2">•</span>
               <span>{movie.genre}</span>
             </p>

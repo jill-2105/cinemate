@@ -6,6 +6,7 @@ const validate = (schema, target = 'body') => {
     const data = req[target] || {};
     const { error, value } = schema.validate(data, { abortEarly: false, stripUnknown: true });
     if (error) {
+      console.error('Validation error:', error);
       return res.status(400).json({
         error: 'Validation failed',
         details: error.details.map(d => d.message),

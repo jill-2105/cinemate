@@ -1,7 +1,19 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const app = require('../app');
+const Reviewer = require('../models/reviewer');
+const Movie = require('../models/movie');
 
 describe('Movies API', () => {
+  // Clean DB before EACH test for isolation
+  beforeEach(async () => {
+    await Reviewer.deleteMany({});
+    await Movie.deleteMany({});
+  });
+
+  afterAll(async () => {
+    await mongoose.connection.close();
+  });
 
   // ADD MOVIE (4 tests)
   test('Add movie valid auth - 201', async () => {

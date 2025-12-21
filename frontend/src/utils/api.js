@@ -70,14 +70,28 @@ export const deleteReviewer = async (username) => {
 }
 
 // Movie endpoints
+// export const getAllMovies = async () => {
+//   try {
+//     const response = await apiClient.get("/movies/all")
+//     return { data: response.data }
+//   } catch (error) {
+//     return { error: error.response?.data?.message || "Failed to fetch movies" }
+//   }
+// }
 export const getAllMovies = async () => {
   try {
     const response = await apiClient.get("/movies/all")
-    return { data: response.data }
+    const data = Array.isArray(response.data.movies) ? response.data.movies : []
+    return { data }
   } catch (error) {
-    return { error: error.response?.data?.message || "Failed to fetch movies" }
+    return {
+      data: [],
+      error: error.response?.data?.message || "Failed to fetch movies",
+    }
   }
 }
+
+
 
 export const getMovie = async (title) => {
   try {

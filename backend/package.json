@@ -4,6 +4,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "joi": "^18.0.1",
+    "mongodb": "^7.0.0",
     "mongoose": "^8.18.3",
     "nodemon": "^3.1.10"
   },
@@ -11,7 +12,8 @@
     "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seed": "node seed.js"
   },
   "jest": {
     "testEnvironment": "node",

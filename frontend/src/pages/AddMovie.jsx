@@ -13,7 +13,7 @@ const AddMovie = () => {
   const [formData, setFormData] = useState({
     title: "",
     director: "",
-    year: "",
+    releaseYear: "",
     genre: "",
     description: "",
     posterUrl: "",
@@ -42,9 +42,9 @@ const AddMovie = () => {
       newErrors.director = "Director is required"
     }
 
-    const year = Number.parseInt(formData.year)
-    if (!formData.year || year < 1900 || year > 2025) {
-      newErrors.year = "Year must be between 1900 and 2025"
+    const releaseYear = Number.parseInt(formData.releaseYear)
+    if (!formData.releaseYear || releaseYear < 1900 || releaseYear > 2025) {
+      newErrors.releaseYear = "releaseYear must be between 1900 and 2025"
     }
 
     if (!formData.description.trim() || formData.description.length < 20) {
@@ -116,20 +116,20 @@ const AddMovie = () => {
             </div>
 
             <div>
-              <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
-                Year *
+              <label htmlFor="releaseYear" className="block text-sm font-medium text-gray-700 mb-2">
+                releaseYear *
               </label>
               <input
                 type="number"
-                id="year"
-                name="year"
+                id="releaseYear"
+                name="releaseYear"
                 min="1900"
                 max="2025"
-                value={formData.year}
+                value={formData.releaseYear}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
-              {errors.year && <p className="text-red-600 text-sm mt-1">{errors.year}</p>}
+              {errors.releaseYear && <p className="text-red-600 text-sm mt-1">{errors.releaseYear}</p>}
             </div>
 
             <div>
